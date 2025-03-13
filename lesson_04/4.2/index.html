@@ -1,0 +1,43 @@
+
+   <script>
+function checkNumber(num) {
+    // Ensure the number is three-digit
+    if (num < 100 || num > 999) {
+        console.log("Please enter a three-digit number!");
+        return;
+    }
+    
+    // Extract the digits from the number
+    let units = num % 10; // Last digit (ones place)
+    let tens = Math.floor((num % 100) / 10); // Middle digit (tens place)
+    let hundreds = Math.floor(num / 100); // First digit (hundreds place)
+
+    // Check if all digits are the same
+    if (hundreds === tens && tens === units) {
+        console.log(`Entered number ${num} : All digits are the same.`);
+    } 
+    // Check if at least two digits are the same
+    else if (hundreds === tens || hundreds === units || tens === units) {
+        console.log(`Entered number ${num} : There are identical digits.`);
+    } 
+    // If none of the above conditions are met, all digits are different
+    else {
+        console.log(`Entered number ${num} : All digits are different.`);
+    }
+}
+
+// Example function calls
+checkNumber(222); // All digits are the same.
+checkNumber(323); // There are identical digits.
+checkNumber(123); // All digits are different.
+
+   </script>
+   <body>
+      <p>
+      Given a three-digit number provided by the user, you need to determine:
+
+      Is it true that all the digits are the same?
+      Are there any digits that are the same?
+   </p>
+   </body>
+   
