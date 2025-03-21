@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emoji CodePoint Сумматор</title>
+  <script src="main.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+      padding: 2em;
+      background: #f8f9fa;
+    }
+    h2 {
+      font-size: 1.8em;
+    }
+    input {
+      font-size: 2em;
+      width: 60px;
+      text-align: center;
+    }
+    button {
+      font-size: 1em;
+      padding: 0.4em 1em;
+      margin-left: 10px;
+    }
+    .log {
+      margin-top: 1em;
+      font-family: monospace;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 1em;
+      white-space: pre-wrap;
+    }
+    .result {
+      font-size: 2.5em;
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎭 Emoji-сумматор по Unicode-коду</h2>
+  <p>Введите эмодзи (или что угодно) в поле ввода и нажмите кнопку "Добавить эмодзи".</p>
+
+  <input type="text" id="emojiInput" maxlength="2" value="🎭" />
+  <button onclick="addEmoji()">Добавить эмодзи</button>
+
+  <div class="result" id="emojiResult">🧠</div>
+
+  <div class="log" id="emojiLog"></div>
+
+  <script>
+    const START = 0x1F300;
+    const END = 0x1F9FF;
+    const RANGE = END - START + 1;
+
+    let total = 0;
+
+    function sumEmoji(emoji) {
+      const code = emoji.codePointAt(0);
+      total += code;
+      const resultCode = START + ((total - START) % RANGE);
+      const resultEmoji = String.fromCodePoint(resultCode);
+
+      // Лог в консоли
+      console.log(`Ввод: ${emoji} (${code}) → Сумма: ${total} → Результат: ${resultEmoji} (${resultCode})`);
+
+      // Обновление на странице
+      const emojiResult = document.getElementById("emojiResult");
+      emojiResult.textContent = resultEmoji;
+
+      const emojiLog = document.getElementById("emojiLog");
+      emojiLog.textContent += `Ввод: ${emoji} (${code}) → Сумма: ${total} → ${resultEmoji} (U+${resultCode.toString(16).toUpperCase()})\n`;
+
+      return resultEmoji;
+    }
+
+    function addEmoji() {
+      const input = document.getElementById("emojiInput");
+      const value = input.value.trim();
+      if (value) {
+        sumEmoji(value);
+        input.value = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
