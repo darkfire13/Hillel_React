@@ -9,7 +9,7 @@ do {
 
    if (!isFinite(input)) { // пользователь ввел не число
     console.log(input); 
-    catTrueLife = false;
+    // catTrueLife = false;
     break;
   }
   
