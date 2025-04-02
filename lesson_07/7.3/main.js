@@ -1,15 +1,23 @@
 (function (){
 
 let index = 0;
-let catTrueLife = true;
+// let catTrueLife = true;
 
 do {
-   const num = prompt("Ввести число більше 100", 1313);
+   const input = prompt("Ввести число більше 100", 1313);
    index++;
+
+   if (!isFinite(input)) { // пользователь ввел не число
+    console.log(input); 
+    catTrueLife = false;
+    break;
+  }
+  
+const num = Number(input);
 
 if (num > 100) {
     console.log(num);
-    catTrueLife = false;
+    // catTrueLife = false;
     // return;
     break;
 } else {
@@ -17,11 +25,5 @@ if (num > 100) {
 }
 
 } while (index < 10);
-
-if (catTrueLife) {
-    console.log("Твоя кошка в шоке!");
-} else {
-    console.log("Поздравляю, ты справился!");
-}
 
 })();
