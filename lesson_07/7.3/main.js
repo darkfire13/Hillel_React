@@ -16,7 +16,7 @@ if (num > 100) {
     console.log(`У кошки 13 жизней, а твое бессмертие в ошибках ${index}`);    
 }
 
-} while (index <= 3);
+} while (index < 10);
 
 if (catTrueLife) {
     console.log("Твоя кошка в шоке!");
