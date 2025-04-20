@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Пример отображения</title>
+    <style>
+        #primer1 {
+            display: none;
+            padding: 5px;
+            background-color: #dddddd;
+            white-space: pre-wrap; /* Чтобы переносы строк сохранялись */
+        }
+        #primer1.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggleBtn">Отобразить</button> пример
+    <pre id="primer1">
+#include <iostream.h> 
+
+void main () {
+    cout<<"Hello, world!";
+}
+    </pre>
+
+    <script>
+        const btn = document.getElementById('toggleBtn');
+        const pre = document.getElementById('primer1');
+
+        btn.addEventListener('click', () => {
+            pre.classList.toggle('visible');
+            btn.textContent = pre.classList.contains('visible') ? 'Скрыть' : 'Отобразить';
+        });
+    </script>
+</body>
+</html>
