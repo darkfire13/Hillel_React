@@ -7,7 +7,6 @@ $(function() {
 
     renderTodos();
 
-    // Добавление задачи
     $form.on('submit', function(e) {
         e.preventDefault();
 
@@ -31,7 +30,6 @@ $(function() {
         $input.val('');
     });
 
-    // Удаление и чекбокс
     $todosWrapper.on('click', function(e) {
         const $target = $(e.target);
         const $todoItem = $target.closest('.todo-item');
@@ -51,6 +49,18 @@ $(function() {
             saveTodos();
             $todoItem.toggleClass('todo-item--checked', $target.prop('checked'));
         }
+
+        // Показ модального окна при клике на текст задачи
+        if ($target.hasClass('todo-item__description')) {
+            const todo = todos.find(todo => todo.id === todoId);
+            if (!todo) return;
+
+            $('#modalTodoText').text(todo.text);
+
+            // Инициализация и показ модального окна Bootstrap 5
+            const todoModal = new bootstrap.Modal(document.getElementById('todoModal'));
+            todoModal.show();
+        }
     });
 
     function renderTodos() {
@@ -62,8 +72,8 @@ $(function() {
             const $li = $(`
                 <li class="todo-item ${checkedClass}" data-id="${todo.id}">
                     <input type="checkbox" ${checked}>
-                    <span class="todo-item__description">${todo.text}</span>
-                    <button class="todo-item__delete">Видалити</button>
+                    <span class="todo-item__description" style="cursor:pointer;">${todo.text}</span>
+                    <button class="todo-item__delete btn btn-danger btn-sm ms-2">Видалити</button>
                 </li>
             `);
             $todosWrapper.append($li);
